@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Star, CheckCircle, CheckCircle2, X, ChevronDown, Sparkles, Eye, Download, Phone, Mail, Lock, Loader2, Timer, Check } from 'lucide-react';
 import { COURSES, BUNDLE_PRICE } from '../constants';
 import { WhatsAppButton } from '../components/WhatsAppButton';
-import { openRazorpayCheckout } from '../services/razorpay';
+import { openSelarCheckout } from '../services/razorpay';
+import { ReviewTicker } from '../components/ReviewTicker';
 import {
   Logo, SocialProofToast,
   PROBLEM_POINTS, TRANSFORMATION_STORIES, FEAR_STATS,
@@ -57,8 +58,8 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'orange' }: { timeLeft: { h
 
         {/* Price - tighter on mobile */}
         <div className="flex items-baseline gap-2">
-          <span className={`text-sm md:text-lg ${variant === 'dark' ? 'text-slate-500' : 'text-white/50'} line-through font-bold`}>₹2,999</span>
-          <span className={`text-3xl md:text-4xl font-display font-black ${textColor}`}>₹{BUNDLE_PRICE}</span>
+          <span className={`text-sm md:text-lg ${variant === 'dark' ? 'text-slate-500' : 'text-white/50'} line-through font-bold`}>₦110,000</span>
+          <span className={`text-3xl md:text-4xl font-display font-black ${textColor}`}>₦{BUNDLE_PRICE.toLocaleString()}</span>
           <span className={`${variant === 'dark' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/20 text-white'} text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full`}>66% OFF</span>
         </div>
 
@@ -68,7 +69,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'orange' }: { timeLeft: { h
           className={`${btnClass} ${btnTextColor} font-bold text-sm md:text-base px-6 md:px-10 py-3.5 md:py-4 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full sm:w-auto`}
         >
           <Download size={16} className="shrink-0" />
-          <span>Download All 12 Courses — ₹{BUNDLE_PRICE}</span>
+          <span>Download All 12 Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
         </button>
 
@@ -86,9 +87,9 @@ const LandingPage: React.FC = () => {
 
   // Payment modal state
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [phone, setPhone] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneError, setPhoneError] = useState(false);
+  const [fullNameError, setFullNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentError, setPaymentError] = useState('');
@@ -106,45 +107,26 @@ const LandingPage: React.FC = () => {
 
   const handlePayment = () => {
     let hasError = false;
-    if (!phone || phone.length < 10) { setPhoneError(true); hasError = true; } else { setPhoneError(false); }
+    if (!fullName.trim()) { setFullNameError(true); hasError = true; } else { setFullNameError(false); }
     if (!email || !validateEmail(email)) { setEmailError(true); hasError = true; } else { setEmailError(false); }
     if (hasError) return;
 
-    setIsLoading(true);
-    setPaymentError('');
-
-    openRazorpayCheckout({
-      amount: BUNDLE_PRICE,
-      courseIds: COURSES.map(c => c.id),
-      userPhone: phone,
-      userEmail: email,
-      onSuccess: (paymentId) => {
-        setIsLoading(false);
-        setPaymentSuccess(paymentId);
-        setShowPaymentModal(false);
-      },
-      onCancel: () => {
-        setIsLoading(false);
-      },
-      onError: (err) => {
-        setIsLoading(false);
-        setPaymentError('Payment failed. Please try again or contact support.');
-        console.error('Razorpay Error:', err);
-      }
-    });
+    openSelarCheckout({ email, name: fullName.trim() });
+    setShowPaymentModal(false);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans overflow-x-hidden selection:bg-blue-100 grid-bg">
-      {/* ═══ STICKY HEADER ═══ */}
-      <header className="sticky top-0 z-[60] bg-white/80 backdrop-blur-2xl border-b border-slate-100/60 px-5 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Logo />
-          <div className="flex items-center gap-4">
-            <button onClick={openPaymentModal} className="hidden md:block text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-all premium-stroke" style={{ background: 'linear-gradient(135deg,#f97316,#ea580c)', boxShadow: '0 0 15px rgba(249,115,22,0.4)' }}>Join 50,000+ Students</button>
-          </div>
+      {/* ═══ NIGERIA ANNOUNCEMENT BANNER ═══ */}
+      <div className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 text-white py-2.5 px-4 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9zdmc+')] opacity-30"></div>
+        <div className="relative z-10 flex items-center justify-center gap-2 text-sm md:text-base font-bold">
+          <span className="text-lg">🇳🇬</span>
+          <span>Now Available in Nigeria!</span>
+          <span className="hidden sm:inline text-white/70">•</span>
+          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Offer</span>
         </div>
-      </header>
+      </div>
 
       <main>
         {/* 1. HERO — The Hook */}
@@ -156,59 +138,55 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="max-w-5xl mx-auto px-5 relative z-10">
             <div className="flex flex-col items-center text-center pt-8 md:pt-16">
-              <div className="mb-4 inline-flex items-center gap-2 px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
-                <CheckCircle size={14} className="text-orange-600" />
-                <span className="text-xs font-bold text-orange-700">Your Complete Journey to Professional 3D Excellence</span>
-              </div>
-              <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 bg-slate-50 border border-slate-200 rounded-full">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                <span className="text-xs font-medium text-slate-600">50,000+ Students Supported 24/7 by Our Team</span>
+              <div className="mb-4 inline-flex flex-col items-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
+                  <span className="text-xs font-bold text-slate-700">Start charging <span className="text-orange-600">₦50,000-₦100,000</span> for designing and rendering.</span>
+                </div>
               </div>
               <h1 className="leading-[1.15] mb-6 text-slate-900 tracking-tight">
-                <span className="block text-slate-400 text-xs md:text-sm font-medium uppercase tracking-[0.3em] mb-3 font-sans">If you want to do</span>
-                <span className="block text-3xl md:text-4xl lg:text-[52px] font-display font-black">
-                  Planning & Designing
+                <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-bold">
+                  Learn to Design
                 </span>
-                <span className="block text-xl md:text-2xl lg:text-3xl font-serif italic text-slate-400 mt-1">
-                  of
+                <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-1">
+                  <span className="text-orange-500">Homes</span>
+                  <span className="text-slate-400 font-light mx-1">,</span>
+                  <span className="text-slate-800">Offices</span>
+                  <span className="text-slate-400 font-light mx-2">&</span>
+                  <span className="text-slate-600">Villas</span>
                 </span>
-                <span className="block text-3xl md:text-4xl lg:text-[52px] font-display font-black mt-1">
-                  <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Interiors</span>
-                  <span className="text-slate-300 font-light mx-2">&</span>
-                  <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">Exteriors</span>
-                </span>
-                <span className="block mt-3 md:mt-4">
-                  <span className="text-slate-400 text-sm md:text-lg font-medium">and</span>
-                  <span className="block text-2xl md:text-3xl lg:text-4xl font-display font-black mt-1">
-                    <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Learn AI</span>
-                    <span className="font-serif italic text-slate-400 text-xl md:text-2xl lg:text-3xl ml-2">for Design</span>
-                  </span>
+                <span className="block text-xl md:text-2xl font-serif italic text-slate-500 mt-4">
+                  and show real 3D to clients.
                 </span>
               </h1>
-              <p className="text-lg md:text-2xl font-display font-bold text-slate-900 mb-3">
-                You're at the <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">right place.</span>
-              </p>
-              <p className="text-sm md:text-base text-slate-500 mb-8 leading-relaxed max-w-2xl mx-auto font-medium">
-                12 industry-standard courses. One affordable bundle. From AutoCAD to AI-powered rendering — everything you need to build a career you're proud of.
+              <p className="text-sm md:text-base text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto">
+                <span className="font-bold">Learn PDR —</span> Planning, Designing & Rendering<br/>
+                <span className="text-slate-500 text-sm">One bundle. Everything included.</span>
               </p>
               
               {/* New Story Section */}
-              <div className="w-full max-w-3xl mx-auto mb-10 text-left bg-gradient-to-br from-white to-slate-50 p-8 md:p-10 rounded-3xl shadow-2xl border border-slate-100 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-orange-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+              <div className="w-full max-w-4xl mx-auto mb-10 text-left bg-white p-6 md:p-8 rounded-3xl shadow-[0_0_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100">
+                <p className="text-lg md:text-xl font-serif text-slate-600 leading-relaxed mb-6 italic">
+                  "In our business of Architecture and Design, <span className="font-bold text-slate-800 border-b border-orange-300">Planning, Design and Rendering</span> matter the most."
+                </p>
+                <p className="text-sm md:text-base text-slate-500 leading-relaxed mb-4">
+                  The question isn't <em className="font-semibold text-slate-700">if</em> you can. It's...
+                </p>
+                <p className="text-xl md:text-2xl font-display font-bold text-orange-500 mb-6">
+                  How to do it FASTER?
+                </p>
                 
-                <p className="text-xl md:text-2xl font-serif text-slate-800 leading-relaxed mb-6 relative z-10 italic">
-                  "In our business of Architecture and Design, <span className="font-bold text-slate-900 border-b-2 border-orange-200">Planning, Design and Rendering</span> matter the most."
-                </p>
-                <div className="w-12 h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full mb-6 relative z-10"></div>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 font-medium relative z-10">
-                  And now, the question is no longer <em className="text-slate-800">how</em> to do it. The real question is... <br/>
-                  <span className="inline-block mt-3 text-2xl md:text-4xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-600 drop-shadow-sm">How to do it FASTER?</span>
-                </p>
-                <div className="flex items-start gap-4 p-5 bg-orange-50/80 border border-orange-200/50 rounded-2xl relative z-10 shadow-inner">
-                  <span className="text-3xl mt-1">🚀</span>
-                  <p className="text-slate-800 font-semibold leading-relaxed text-lg">
-                    That's exactly why we present you this comprehensive course. A complete blueprint designed to make you <strong className="text-orange-600 bg-orange-100/50 px-2 py-0.5 rounded-md">job or business ready in just one month.</strong>
+                {/* Hero Video inside the card */}
+                <div className="w-full mb-6 overflow-hidden rounded-xl shadow-md" style={{ position: 'relative', paddingTop: '56.25%' }}>
+                  <iframe src="https://iframe.mediadelivery.net/embed/494628/81badf78-a3b0-42fa-9f23-9f7213d4185c?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 'none', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'transparent' }} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowFullScreen={true}></iframe>
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 8px 16px', background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}>
+                    <p style={{ color: '#fff', fontWeight: 700, fontSize: 'clamp(0.55rem, 2.8vw, 1.1rem)', textAlign: 'center', margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.5)', whiteSpace: 'nowrap' }}>Learn Complete Interior & Exterior Design in one package.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-orange-50/50 rounded-xl">
+                  <span className="text-2xl mt-0.5">🚀</span>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    That's exactly why we built this. A complete blueprint — from software basics to client-ready renders — designed to make you <strong className="text-orange-600">job or business ready in just one month.</strong>
                   </p>
                 </div>
               </div>
@@ -219,18 +197,32 @@ const LandingPage: React.FC = () => {
                   Get All Courses & 24/7 Team Support <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                 </button>
               </div>
-              <p className="text-xs text-slate-500 mb-10 font-bold">24/7 support from team, installation help to course doubts • Free Software Links Included • 7-Day Money-Back Guarantee</p>
+              <p className="text-xs text-slate-500 mb-8 font-bold">24/7 support from team, installation help to course doubts • Free Software Links Included • 7-Day Money-Back Guarantee</p>
               
-              {/* Hero Video */}
-              <div className="w-full max-w-4xl mb-6 overflow-hidden rounded-2xl shadow-2xl" style={{ position: 'relative', paddingTop: '56.25%' }}>
-                <iframe title="Course overview video" src="https://iframe.mediadelivery.net/embed/489113/e68f78b5-c535-4e8f-aaee-8a44b514a9ec?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="eager" style={{ border: 'none', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'transparent' }} allow="accelerometer; gyroscope; autoplay; encrypted-in-picture;" allowFullScreen={true} />
+              {/* ═══════ YOU CAN SECTION ═══════ */}
+              <div className="w-full mt-4">
+                <h2 className="text-center text-2xl md:text-3xl font-display font-black text-slate-800 mb-6">After Course You Can</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                  <div className="bg-amber-50/30 border border-amber-200/70 rounded-2xl p-5 md:p-6 flex flex-col gap-1.5 transition-all hover:shadow-sm">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-xl">💼</span>
+                      <span className="font-display font-extrabold text-slate-900 text-base md:text-lg">Get a Better Job</span>
+                    </div>
+                    <p className="text-slate-500 text-xs md:text-sm pl-8 font-medium">Higher-paying design roles</p>
+                  </div>
+                  <div className="bg-amber-50/30 border border-amber-200/70 rounded-2xl p-5 md:p-6 flex flex-col gap-1.5 transition-all hover:shadow-sm">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-xl">🏢</span>
+                      <span className="font-display font-extrabold text-slate-900 text-base md:text-lg">Own Design Firm</span>
+                    </div>
+                    <p className="text-slate-500 text-xs md:text-sm pl-8 font-medium">Freelance & studio projects</p>
+                  </div>
+                </div>
               </div>
-
 
             </div>
           </div>
         </section>
-
 
         {/* ═══════ COURSE SLIDESHOW — Master Every Tool ═══════ */}
         <section className="py-8 md:py-16 bg-white border-b border-gray-100 overflow-hidden relative">
@@ -411,7 +403,7 @@ const LandingPage: React.FC = () => {
               <p>Learning complex software can feel overwhelming <strong className="text-slate-900">when you're doing it alone.</strong></p>
               <p>That's why our program is built differently. You aren't just getting tutorial videos; you're joining a community where our team reviews your work, answers your technical questions, and cheers you on as you improve.</p>
               <p>Whether you are a student, a freelancer, or a studio owner, <strong className="text-orange-600">we are here to support your transition</strong> into modern, high-quality 3D rendering. No more struggling with endless YouTube tutorials that leave you confused.</p>
-              <p>You don't need to spend lakhs of rupees on expensive, outdated courses to build a portfolio you can be incredibly proud of.</p>
+              <p>You don't need to spend millions of naira on expensive, outdated courses to build a portfolio you can be incredibly proud of.</p>
               
               <div className="my-10 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-2xl p-6 md:p-8 shadow-soft">
                 <p className="font-bold text-slate-900 text-xl mb-4">Here is How We Support You:</p>
@@ -421,7 +413,7 @@ const LandingPage: React.FC = () => {
                   <li className="flex items-center gap-3"><CheckCircle size={18} className="text-orange-500 shrink-0" /><span className="text-slate-800">24/7 support from team, installation help to course doubts—whenever you're stuck, we're here.</span></li>
                 </ul>
                 <div className="mt-6 pt-6 border-t border-orange-100 flex items-center justify-between">
-                  <span className="text-slate-600 text-sm italic font-bold">A complete learning ecosystem for just ₹999.</span>
+                  <span className="text-slate-600 text-sm italic font-bold">A complete learning ecosystem for just ₦37,000.</span>
                   <button onClick={openPaymentModal} className="text-orange-600 font-bold text-sm hover:text-orange-800 flex items-center gap-1 group">Join Our Community <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
                 </div>
               </div>
@@ -540,8 +532,35 @@ const LandingPage: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="max-w-4xl mx-auto px-5 mt-16 md:mt-24 text-center reveal">
-            <img src="/renders/mentors.png" alt="Industry Experts" className="w-full h-auto drop-shadow-2xl" />
+          <div className="max-w-6xl mx-auto px-5 mt-16 md:mt-24 text-center reveal">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight mb-4">Learn From Global Experts</h2>
+            <p className="text-slate-600 text-base mb-12">Our mentors bring decades of combined experience from top international studios.</p>
+            {/* Mentors Gallery Slider */}
+            <div 
+              className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 w-full"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <style>{`.flex::-webkit-scrollbar { display: none; }`}</style>
+              {[
+                { name: 'Alex Mercer', role: 'Lead 3D Artist', image: 'https://images.unsplash.com/photo-1678282342910-a135f7b900ae?q=80&w=1296&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                { name: 'Elena Rossi', role: 'Architectural Visualizer', image: 'https://images.pexels.com/photos/36813835/pexels-photo-36813835.jpeg' },
+                { name: 'Julian Vance', role: 'Senior Interior Designer', image: 'https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                { name: 'Sophia Sterling', role: 'AI Design Specialist', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=560&fit=crop&crop=face' },
+                { name: 'Liam Chen', role: 'VFX Supervisor', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=560&fit=crop&crop=face' },
+                { name: 'Maya Patel', role: 'Concept Artist', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=560&fit=crop&crop=face' },
+              ].map((mentor, idx) => (
+                <div key={idx} className="shrink-0 w-[160px] sm:w-[180px] md:w-[220px] snap-center bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-soft hover:shadow-xl transition-all group">
+                  <div className="aspect-[4/5] overflow-hidden relative">
+                    <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 w-full p-4 text-left">
+                      <h3 className="text-white font-display font-bold text-base md:text-lg mb-0.5 leading-tight">{mentor.name}</h3>
+                      <p className="text-blue-300 text-[10px] md:text-xs font-medium">{mentor.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -588,7 +607,7 @@ const LandingPage: React.FC = () => {
             <div className="relative z-10 w-full flex items-center justify-between">
               <div className="flex flex-col items-start leading-tight gap-1">
                 <span className="text-[11px] md:text-sm font-black uppercase tracking-widest text-yellow-200 animate-pulse bg-black/20 px-2 py-0.5 rounded-md inline-block">⚠️ Offer Ends In {formatTime(timeLeft.h)}:{formatTime(timeLeft.m)}:{formatTime(timeLeft.s)}</span>
-                <span className="text-[15px] md:text-lg font-black uppercase tracking-[0.05em] text-white">Download All Courses — ₹{BUNDLE_PRICE}</span>
+                <span className="text-[15px] md:text-lg font-black uppercase tracking-[0.05em] text-white">Download All Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
               </div>
               <ArrowRight size={24} className="text-white group-hover:translate-x-1 transition-transform drop-shadow-md" />
             </div>
@@ -598,8 +617,24 @@ const LandingPage: React.FC = () => {
 
       {/* ═══════ PAYMENT MODAL ═══════ */}
       {showPaymentModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 gap-3">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => !isLoading && setShowPaymentModal(false)} />
+          
+          {/* Timer above the modal */}
+          <div className="relative z-10 w-full max-w-md bg-red-50 rounded-2xl p-3 flex items-center justify-between border border-red-100 shadow-lg animate-[fadeIn_0.3s_ease-out]">
+            <div className="flex items-center gap-2">
+              <Timer size={14} className="text-blue-600 animate-pulse" />
+              <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
+            </div>
+            <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-blue-600 bg-white px-2.5 py-1 rounded-md border border-red-100 shadow-sm">
+              <span>{formatTime(timeLeft.h)}</span>
+              <span className="text-gray-400">:</span>
+              <span>{formatTime(timeLeft.m)}</span>
+              <span className="text-gray-400">:</span>
+              <span>{formatTime(timeLeft.s)}</span>
+            </div>
+          </div>
+
           <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden animate-[fadeIn_0.3s_ease-out]">
             <button aria-label="Close payment modal" onClick={() => !isLoading && setShowPaymentModal(false)} className="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center bg-white/20 hover:bg-white/40 rounded-full text-white transition-colors cursor-pointer">
               <X size={16} />
@@ -615,9 +650,9 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-2">All {COURSES.length} Courses</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-display font-black">₹{BUNDLE_PRICE}</span>
-                  <span className="text-gray-400 text-sm line-through">₹11,988</span>
-                  <span className="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full">92% OFF</span>
+                  <span className="text-3xl font-display font-black">₦{BUNDLE_PRICE.toLocaleString()}</span>
+                  <span className="text-gray-400 text-sm line-through">₦70,000</span>
+                  <span className="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-0.5 rounded-full">50% OFF</span>
                 </div>
               </div>
             </div>
@@ -633,37 +668,20 @@ const LandingPage: React.FC = () => {
                 ))}
               </div>
 
-              {/* Timer */}
-              <div className="bg-red-50 rounded-xl p-3 mb-4 flex items-center justify-between border border-red-100">
-                <div className="flex items-center gap-2">
-                  <Timer size={14} className="text-blue-600 animate-pulse" />
-                  <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
-                </div>
-                <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-blue-600 bg-white px-2.5 py-1 rounded-md border border-red-100 shadow-sm">
-                  <span>{formatTime(timeLeft.h)}</span>
-                  <span className="text-gray-400">:</span>
-                  <span>{formatTime(timeLeft.m)}</span>
-                  <span className="text-gray-400">:</span>
-                  <span>{formatTime(timeLeft.s)}</span>
-                </div>
-              </div>
+
 
               {/* Contact Inputs */}
               <div className="space-y-3 mb-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 px-1">Phone Number</label>
-                  <div className="relative">
-                    <Phone size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                    <span className="absolute left-9 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">+91</span>
-                    <input
-                      type="tel"
-                      placeholder="10-digit number"
-                      value={phone}
-                      onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '').slice(0, 10)); setPhoneError(false); }}
-                      className={`w-full pl-16 pr-4 py-2.5 bg-gray-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all`}
-                    />
-                  </div>
-                  {phoneError && <p className="text-red-500 text-[10px] mt-1 px-1 font-bold">Enter a valid 10-digit number</p>}
+                  <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 px-1">Full Name</label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    value={fullName}
+                    onChange={(e) => { setFullName(e.target.value); setFullNameError(false); }}
+                    className={`w-full px-4 py-2.5 bg-gray-50 border ${fullNameError ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all`}
+                  />
+                  {fullNameError && <p className="text-red-500 text-[10px] mt-1 px-1 font-bold">Enter your full name</p>}
                 </div>
                 <div>
                   <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 px-1">Email Address</label>
@@ -694,11 +712,12 @@ const LandingPage: React.FC = () => {
                 ) : (
                   <>
                     <Download size={18} />
-                    Pay ₹{BUNDLE_PRICE} & Download All
+                    Download Courses
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
               </button>
+              <ReviewTicker />
               <div className="flex items-center justify-center gap-2 mt-3 text-[10px] text-gray-400">
                 <Lock size={10} /> SSL Secured Payment • 7-Day Money-Back Guarantee
               </div>
@@ -717,7 +736,7 @@ const LandingPage: React.FC = () => {
             </div>
             <h2 className="text-3xl font-display font-black text-gray-900 mb-2">Payment Successful!</h2>
             <p className="text-gray-500 mb-6 leading-relaxed">
-              Your payment of <span className="font-bold text-gray-900">₹{BUNDLE_PRICE}</span> was received. Welcome to Avada!
+              Your payment of <span className="font-bold text-gray-900">₦{BUNDLE_PRICE.toLocaleString()}</span> was received. Welcome to Avada!
             </p>
             <div className="bg-gray-50 rounded-2xl p-5 mb-6 text-left border border-gray-100">
               <div className="flex items-center gap-2 mb-2">
@@ -743,7 +762,7 @@ const LandingPage: React.FC = () => {
               </div>
               <div className="sm:text-right w-full sm:w-auto p-3 bg-white rounded-lg border border-gray-100">
                 <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Support / WhatsApp</div>
-                <a href="https://wa.me/918545015333" target="_blank" rel="noopener noreferrer" className="font-bold text-green-600 hover:text-green-700">+91 8545015333</a>
+                <a href="https://wa.me/2348185450153" target="_blank" rel="noopener noreferrer" className="font-bold text-green-600 hover:text-green-700">WhatsApp Support</a>
               </div>
             </div>
             <button
