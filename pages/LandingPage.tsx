@@ -140,7 +140,7 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-col items-center text-center pt-8 md:pt-16">
               <div className="mb-4 inline-flex flex-col items-center">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
-                  <span className="text-xs font-bold text-slate-700">Start charging <span className="text-orange-600">₦50,000-₦100,000</span> for designing and rendering.</span>
+                  <span className="text-xs font-bold text-slate-700">Start charging <span className="text-orange-600">₦500,000-₦1,000,000</span> for designing and rendering.</span>
                 </div>
               </div>
               <h1 className="leading-[1.15] mb-6 text-slate-900 tracking-tight">
