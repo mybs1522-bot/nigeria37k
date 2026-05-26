@@ -332,8 +332,8 @@ const LandingPage: React.FC = () => {
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight">10,000+ Nigerian Students</h2>
             </div>
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 reveal">
-              <img src="https://drive.google.com/uc?export=view&id=1MXpuSNzxwru2XaHmFJ3RnC9CL1YcckRS" alt="Nigerian Students 1" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
-              <img src="https://drive.google.com/uc?export=view&id=1U5Yisfd31i6-OFBRVorAjhO5O0S72JzG" alt="Nigerian Students 2" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
+              <img src="/student1.jpg" alt="Nigerian Students 1" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
+              <img src="/student2.jpg" alt="Nigerian Students 2" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
             </div>
           </div>
         </section>
