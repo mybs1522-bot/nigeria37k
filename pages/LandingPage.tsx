@@ -176,11 +176,8 @@ const LandingPage: React.FC = () => {
                 </p>
                 
                 {/* Hero Video inside the card */}
-                <div className="w-full mb-6 overflow-hidden rounded-xl shadow-md" style={{ position: 'relative', paddingTop: '56.25%' }}>
-                  <iframe src="https://iframe.mediadelivery.net/embed/494628/81badf78-a3b0-42fa-9f23-9f7213d4185c?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 'none', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'transparent' }} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowFullScreen={true}></iframe>
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 8px 16px', background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)', pointerEvents: 'none', zIndex: 10 }}>
-                    <p style={{ color: '#fff', fontWeight: 700, fontSize: 'clamp(0.55rem, 2.8vw, 1.1rem)', textAlign: 'center', margin: 0, textShadow: '0 2px 8px rgba(0,0,0,0.5)', whiteSpace: 'nowrap' }}>Learn Complete Interior & Exterior Design in one package.</p>
-                  </div>
+                <div style={{ position: 'relative', paddingTop: '56.25%' }}>
+                  <iframe src="https://iframe.mediadelivery.net/embed/494628/1f7b76dd-7d47-4f39-87af-bff5a6b02d08?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }} allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowFullScreen={true}></iframe>
                 </div>
 
                 <div className="flex items-start gap-4 p-4 bg-orange-50/50 rounded-xl">
@@ -325,6 +322,19 @@ const LandingPage: React.FC = () => {
         <section className="py-8 md:py-10 px-4 md:px-5">
           <div className="max-w-3xl mx-auto">
             <CtaWithTimer timeLeft={timeLeft} onClick={openPaymentModal} variant="orange" />
+          </div>
+        </section>
+
+        {/* NEW SECTION: Nigerian Students */}
+        <section className="py-16 bg-slate-50 border-b border-slate-200 grid-bg">
+          <div className="max-w-5xl mx-auto px-5 text-center">
+            <div className="reveal mb-10">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 tracking-tight">10,000+ Nigerian Students</h2>
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 reveal">
+              <img src="https://drive.google.com/uc?export=view&id=1MXpuSNzxwru2XaHmFJ3RnC9CL1YcckRS" alt="Nigerian Students 1" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
+              <img src="https://drive.google.com/uc?export=view&id=1U5Yisfd31i6-OFBRVorAjhO5O0S72JzG" alt="Nigerian Students 2" className="rounded-2xl shadow-xl w-full md:w-1/2 object-cover border border-slate-200 hover:scale-[1.02] transition-transform" />
+            </div>
           </div>
         </section>
 
