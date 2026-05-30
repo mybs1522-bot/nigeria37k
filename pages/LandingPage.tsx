@@ -140,18 +140,18 @@ const LandingPage: React.FC = () => {
                   <span className="text-[10px] sm:text-xs font-bold text-slate-700 whitespace-nowrap">Start charging <span className="text-orange-600">₦500,000-₦1,000,000</span> for designing and rendering.</span>
                 </div>
               </div>
-              <h1 className="leading-[1.15] mb-6 text-slate-900 tracking-tight">
+              <h1 className="leading-none md:leading-[1.15] mb-6 text-slate-900 tracking-tight">
                 <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-bold">
                   Learn to Design
                 </span>
-                <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-1">
+                <span className="block text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-0 md:mt-1">
                   <span className="text-orange-500">Homes</span>
                   <span className="text-slate-400 font-light mx-1">,</span>
                   <span className="text-slate-800">Offices</span>
                   <span className="text-slate-400 font-light mx-2">&</span>
                   <span className="text-slate-600">Villas</span>
                 </span>
-                <span className="block text-xl md:text-2xl font-serif italic text-slate-500 mt-4">
+                <span className="block text-xl md:text-2xl font-serif italic text-slate-500 mt-1.5 md:mt-4">
                   and show real 3D to clients.
                 </span>
               </h1>
