@@ -137,7 +137,7 @@ const LandingPage: React.FC = () => {
             <div className="flex flex-col items-center text-center pt-8 md:pt-16">
               <div className="mb-4 inline-flex flex-col items-center">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
-                  <span className="text-xs font-bold text-slate-700">Start charging <span className="text-orange-600">₦500,000-₦1,000,000</span> for designing and rendering.</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-slate-700 whitespace-nowrap">Start charging <span className="text-orange-600">₦500,000-₦1,000,000</span> for designing and rendering.</span>
                 </div>
               </div>
               <h1 className="leading-[1.15] mb-6 text-slate-900 tracking-tight">
@@ -158,7 +158,7 @@ const LandingPage: React.FC = () => {
               <p className="text-sm md:text-base text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto">
                 <span className="font-bold">Learn PDR —</span> Planning, Designing & Rendering<br/>
                 <span className="text-slate-500 text-sm">One bundle. Everything included.</span>
-                <span className="text-[10px] md:text-xs font-bold text-slate-600 uppercase tracking-widest mt-3 block">Earn Globally, Design For Clients all over the world.</span>
+                <span className="text-[10px] md:text-xs font-bold text-orange-600 uppercase tracking-widest mt-3 block">Earn Globally, Design For Clients all over the world.</span>
               </p>
               
               {/* New Story Section */}
