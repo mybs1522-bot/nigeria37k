@@ -38,7 +38,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'orange' }: { timeLeft: { h
         {/* Timer label */}
         <div className="flex items-center gap-1.5">
           <Timer size={14} className={`${timerAccent} animate-pulse`} />
-          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Offer Ends In</span>
+          <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${timerAccent}`}>Eid Al-Adha Offer Ends In</span>
         </div>
 
         {/* Timer digits - compact on mobile */}
@@ -124,7 +124,7 @@ const LandingPage: React.FC = () => {
           <span className="text-lg">🇳🇬</span>
           <span>Now Available in Nigeria!</span>
           <span className="hidden sm:inline text-white/70">•</span>
-          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Offer</span>
+          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Eid Al-Adha Offer</span>
         </div>
       </div>
 
@@ -616,7 +616,7 @@ const LandingPage: React.FC = () => {
           <button onClick={openPaymentModal} className="w-full relative group overflow-hidden text-white rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all py-2.5 flex items-center px-4" style={{ background: 'linear-gradient(90deg,#f97316,#ea580c,#f97316)', boxShadow: '0 0 20px rgba(249,115,22,0.4)' }}>
             <div className="relative z-10 w-full flex items-center justify-between">
               <div className="flex flex-col items-start leading-tight gap-1">
-                <span className="text-[11px] md:text-sm font-black uppercase tracking-widest text-yellow-200 animate-pulse bg-black/20 px-2 py-0.5 rounded-md inline-block">⚠️ Offer Ends In {formatTime(timeLeft.h)}:{formatTime(timeLeft.m)}:{formatTime(timeLeft.s)}</span>
+                <span className="text-[11px] md:text-sm font-black uppercase tracking-widest text-yellow-200 animate-pulse bg-black/20 px-2 py-0.5 rounded-md inline-block">⚠️ Eid Al-Adha Offer Ends In {formatTime(timeLeft.h)}:{formatTime(timeLeft.m)}:{formatTime(timeLeft.s)}</span>
                 <span className="text-[15px] md:text-lg font-black uppercase tracking-[0.05em] text-white">Download All Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
               </div>
               <ArrowRight size={24} className="text-white group-hover:translate-x-1 transition-transform drop-shadow-md" />
@@ -634,7 +634,7 @@ const LandingPage: React.FC = () => {
           <div className="relative z-10 w-full max-w-md bg-red-50 rounded-2xl p-3 flex items-center justify-between border border-red-100 shadow-lg animate-[fadeIn_0.3s_ease-out]">
             <div className="flex items-center gap-2">
               <Timer size={14} className="text-blue-600 animate-pulse" />
-              <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
+              <span className="text-xs font-bold text-gray-900">Eid Al-Adha offer ends in:</span>
             </div>
             <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-blue-600 bg-white px-2.5 py-1 rounded-md border border-red-100 shadow-sm">
               <span>{formatTime(timeLeft.h)}</span>

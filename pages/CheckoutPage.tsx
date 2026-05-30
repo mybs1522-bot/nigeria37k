@@ -120,7 +120,7 @@ const CheckoutPage: React.FC = () => {
           <span className="text-lg">🇳🇬</span>
           <span>Now Available in Nigeria!</span>
           <span className="hidden sm:inline text-white/70">•</span>
-          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Offer</span>
+          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Eid Al-Adha Offer</span>
         </div>
       </div>
       <style>{`
@@ -496,7 +496,7 @@ const CheckoutPage: React.FC = () => {
           <div className="relative z-10 w-full max-w-md bg-red-50 rounded-2xl p-3 flex items-center justify-between border border-red-100 shadow-lg animate-[fadeIn_0.3s_ease-out]">
             <div className="flex items-center gap-2">
               <Timer size={14} className="text-brand-primary animate-pulse" />
-              <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
+              <span className="text-xs font-bold text-gray-900">Eid Al-Adha offer ends in:</span>
             </div>
             <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-brand-primary bg-white px-2.5 py-1 rounded-md border border-red-100 shadow-sm">
               <span>{formatTime(timeLeft.h)}</span>

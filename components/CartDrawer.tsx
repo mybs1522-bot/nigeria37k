@@ -219,7 +219,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         <div className="bg-red-50 rounded-xl p-3 mb-4 flex items-center justify-between border border-red-100">
                             <div className="flex items-center gap-2">
                                 <Timer size={16} className="text-brand-primary animate-pulse" />
-                                <span className="text-xs font-bold text-gray-900">Offer ends in:</span>
+                                <span className="text-xs font-bold text-gray-900">Eid Al-Adha offer ends in:</span>
                             </div>
                             <div className="flex items-center gap-0.5 font-display font-bold text-sm tabular-nums text-brand-primary bg-white px-2.5 py-1 rounded-md border border-red-100 shadow-sm">
                                 <span>{formatTime(timeLeft.h)}</span>

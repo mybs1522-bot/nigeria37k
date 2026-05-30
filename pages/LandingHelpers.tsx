@@ -81,7 +81,7 @@ export const CallToActionWidget = ({ timeLeft, onClick, headline, subtext }: { t
           <div className="flip-clock-group"><div className="flex gap-1"><FlipDigit value={s[0]} /><FlipDigit value={s[1]} /></div><span className="flip-clock-label">SEC</span></div>
         </div>
         <div className="mb-6">
-          <p className="text-red-400 font-semibold text-sm mt-2">Special Offer — Don't miss this ₦37,000 steal deal</p>
+          <p className="text-red-400 font-semibold text-sm mt-2">Eid Al-Adha Offer — Don't miss this ₦37,000 steal deal</p>
         </div>
         <div className="w-full max-w-md mx-auto">
           <button onClick={onClick} className="cta-primary w-full text-white px-8 py-4 md:py-5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 group hover:scale-[1.03] active:scale-[0.98] premium-stroke" style={{ background: 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)', boxShadow: '0 6px 20px -4px rgba(249,115,22,0.5), 0 12px 40px -8px rgba(234,88,12,0.3)', border: '1px solid rgba(255,255,255,0.15)' }}>
