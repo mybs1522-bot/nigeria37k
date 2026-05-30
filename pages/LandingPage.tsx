@@ -121,7 +121,6 @@ const LandingPage: React.FC = () => {
       <div className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 text-white py-2.5 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9zdmc+')] opacity-30"></div>
         <div className="relative z-10 flex items-center justify-center gap-2 text-sm md:text-base font-bold">
-          <span className="text-lg">🇳🇬</span>
           <span>Limited Time Eid Al-Adha Offer in Nigeria</span>
         </div>
       </div>
@@ -159,6 +158,7 @@ const LandingPage: React.FC = () => {
               <p className="text-sm md:text-base text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto">
                 <span className="font-bold">Learn PDR —</span> Planning, Designing & Rendering<br/>
                 <span className="text-slate-500 text-sm">One bundle. Everything included.</span>
+                <span className="text-[10px] md:text-xs font-bold text-slate-600 uppercase tracking-widest mt-3 block">Earn Globally, Design For Clients all over the world.</span>
               </p>
               
               {/* New Story Section */}
