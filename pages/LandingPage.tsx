@@ -178,10 +178,9 @@ const LandingPage: React.FC = () => {
                   <iframe src="https://iframe.mediadelivery.net/embed/494628/1f7b76dd-7d47-4f39-87af-bff5a6b02d08?autoplay=true&loop=true&muted=true&preload=true&responsive=true" loading="lazy" style={{ border: 0, position: 'absolute', top: 0, height: '100%', width: '100%' }} allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowFullScreen={true}></iframe>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-orange-50/50 rounded-xl">
-                  <span className="text-2xl mt-0.5">🚀</span>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    That's exactly why we built this. A complete blueprint — from software basics to client-ready renders — designed to make you <strong className="text-orange-600">job or business ready in just one month.</strong>
+                <div className="w-full bg-orange-50/50 rounded-xl p-3 md:p-4 mt-2">
+                  <p className="text-slate-600 text-xs md:text-sm leading-[1.4] md:leading-relaxed">
+                    That's exactly why we built this. A complete blueprint from software basics to client-ready renders designed to make you <strong className="text-orange-600">job or business ready in just one month.</strong>
                   </p>
                 </div>
               </div>
