@@ -122,9 +122,7 @@ const LandingPage: React.FC = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9zdmc+')] opacity-30"></div>
         <div className="relative z-10 flex items-center justify-center gap-2 text-sm md:text-base font-bold">
           <span className="text-lg">🇳🇬</span>
-          <span>Now Available in Nigeria!</span>
-          <span className="hidden sm:inline text-white/70">•</span>
-          <span className="hidden sm:inline text-emerald-100 font-medium">Special Limited Time Eid Al-Adha Offer</span>
+          <span>Limited Time Eid Al-Adha Offer in Nigeria</span>
         </div>
       </div>
 
