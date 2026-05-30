@@ -207,7 +207,7 @@ const CheckoutPage: React.FC = () => {
             className="flex items-center gap-2 bg-gray-900 text-white font-bold text-xs px-5 py-2.5 rounded-full hover:bg-black transition-colors"
           >
             <Download size={14} className="text-yellow-400" />
-            <span className="hidden sm:inline">Download All Courses —</span> ₦{BUNDLE_PRICE.toLocaleString()}
+            <span className="hidden sm:inline">Download All Courses</span>
           </button>
         </div>
       </nav>
@@ -328,7 +328,7 @@ const CheckoutPage: React.FC = () => {
               className="mt-6 md:mt-8 inline-flex items-center gap-1.5 md:gap-3 px-5 md:px-10 py-3.5 md:py-5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl md:rounded-2xl font-bold text-[13px] md:text-lg shadow-xl shadow-blue-500/30 hover:shadow-blue-500/40 hover:scale-[1.02] transition-all group w-full sm:w-auto justify-center animate-shimmer border border-blue-400/50"
             >
               <Download size={16} className="md:w-5 md:h-5 shrink-0" />
-              <span className="whitespace-nowrap">Download All Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
+              <span className="whitespace-nowrap">Download All Courses</span>
               <ArrowRight size={16} className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform shrink-0" />
             </button>
             <p className="mt-4 text-xs md:text-sm text-gray-500 font-medium max-w-[280px] md:max-w-none mx-auto leading-relaxed">Lifetime access • All software included free • 7-day money-back guarantee</p>
@@ -466,15 +466,10 @@ const CheckoutPage: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="text-right hidden sm:block">
-                <div className="text-[10px] text-gray-400 uppercase tracking-widest leading-tight">Bundle Price</div>
-                <div className="text-lg font-display font-bold text-white leading-tight">₦{BUNDLE_PRICE.toLocaleString()}</div>
-              </div>
               <button
                 onClick={() => setShowPaymentModal(true)}
                 className="bg-brand-primary hover:bg-blue-700 text-white font-bold px-5 py-2 rounded-lg flex items-center gap-1.5 transition-all shadow-glow hover:shadow-glow-lg text-sm"
               >
-                <span className="sm:hidden font-display text-base">₦{BUNDLE_PRICE.toLocaleString()}</span>
                 <Download size={14} />
                 <span>Download All</span>
                 <ArrowRight size={14} />

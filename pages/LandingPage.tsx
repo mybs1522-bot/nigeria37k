@@ -69,7 +69,7 @@ const CtaWithTimer = ({ timeLeft, onClick, variant = 'orange' }: { timeLeft: { h
           className={`${btnClass} ${btnTextColor} font-bold text-sm md:text-base px-6 md:px-10 py-3.5 md:py-4 rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 group hover:scale-[1.02] active:scale-[0.98] transition-all w-full sm:w-auto`}
         >
           <Download size={16} className="shrink-0" />
-          <span>Download All 12 Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
+          <span>Download All 12 Courses</span>
           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform shrink-0" />
         </button>
 
@@ -614,7 +614,7 @@ const LandingPage: React.FC = () => {
             <div className="relative z-10 w-full flex items-center justify-between">
               <div className="flex flex-col items-start leading-tight gap-1">
                 <span className="text-[11px] md:text-sm font-black uppercase tracking-widest text-yellow-200 animate-pulse bg-black/20 px-2 py-0.5 rounded-md inline-block">⚠️ Eid Al-Adha Offer Ends In {formatTime(timeLeft.h)}:{formatTime(timeLeft.m)}:{formatTime(timeLeft.s)}</span>
-                <span className="text-[15px] md:text-lg font-black uppercase tracking-[0.05em] text-white">Download All Courses — ₦{BUNDLE_PRICE.toLocaleString()}</span>
+                <span className="text-[15px] md:text-lg font-black uppercase tracking-[0.05em] text-white">Download All Courses</span>
               </div>
               <ArrowRight size={24} className="text-white group-hover:translate-x-1 transition-transform drop-shadow-md" />
             </div>
